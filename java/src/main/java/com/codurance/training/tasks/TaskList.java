@@ -9,8 +9,7 @@ import java.util.*;
 public final class TaskList implements Runnable {
     private static final String QUIT = "quit";
 
-    //private final Map<String, List<Task>> tasks = new LinkedHashMap<>();
-    private final List<Project> projects = new ArrayList<Project>();
+    private final List<Project> projects = new ArrayList<>();
     private final BufferedReader in;
     private final PrintWriter out;
 
@@ -95,8 +94,7 @@ public final class TaskList implements Runnable {
     }
 
     private void addProject(String name) {
-        //tasks.put(name, new ArrayList<Task>());
-        projects.add(new Project(name, new ArrayList<Task>()));
+        projects.add(new Project(name, new ArrayList<>()));
     }
 
     private void addTask(String projectName, String description) {
