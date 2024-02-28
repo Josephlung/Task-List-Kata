@@ -8,12 +8,10 @@ import java.util.*;
 
 public final class TaskList implements Runnable {
     private static final String QUIT = "quit";
-
     private final List<Project> projects = new ArrayList<>();
     private final BufferedReader in;
     private final PrintWriter out;
-
-    private long lastId = 0;
+    private final Map<String, Command> commandMap;
 
     public static void main(String[] args) throws Exception {
         BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
@@ -24,6 +22,13 @@ public final class TaskList implements Runnable {
     public TaskList(BufferedReader reader, PrintWriter writer) {
         this.in = reader;
         this.out = writer;
+        commandMap = new HashMap<>();
+        commandMap.put("show", new ShowCommand(this, out));
+        commandMap.put("add", new AddCommand(this, out));
+        commandMap.put("check", new CheckCommand(this, out));
+        commandMap.put("uncheck", new UncheckCommand(this, out));
+        commandMap.put("help", new HelpCommand(out));
+        commandMap.put("error", new ErrorCommand(out));
     }
 
     public void run() {
@@ -43,109 +48,17 @@ public final class TaskList implements Runnable {
         }
     }
 
+    public List<Project> getProjects() {
+        return projects;
+    }
+
     private void execute(String commandLine) {
         String[] commandRest = commandLine.split(" ", 2);
-        String command = commandRest[0];
-        switch (command) {
-            case "show":
-                show();
-                break;
-            case "add":
-                add(commandRest[1]);
-                break;
-            case "check":
-                check(commandRest[1]);
-                break;
-            case "uncheck":
-                uncheck(commandRest[1]);
-                break;
-            case "help":
-                help();
-                break;
-            default:
-                error(command);
-                break;
+        Command command = commandMap.getOrDefault(commandRest[0], commandMap.get("error"));
+        if(commandRest.length > 1) {
+            command.executeCommand(commandRest[1]);
+        }else {
+            command.executeCommand(commandLine);
         }
-    }
-
-    private void show() {
-        for (Project project : projects) {
-            out.println(project.getProjectName());
-            for (Task task : project.getTasks()) {
-                char teskStatus = ' ';
-                if(task.isDone()) {
-                    teskStatus = 'x';
-                }
-                out.printf("    [%c] %d: %s%n", teskStatus, task.getId(), task.getDescription());
-            }
-            out.println();
-        }
-    }
-
-    private void add(String commandLine) {
-        String[] subcommandRest = commandLine.split(" ", 2);
-        String subcommand = subcommandRest[0];
-        if (subcommand.equals("project")) {
-            addProject(subcommandRest[1]);
-        } else if (subcommand.equals("task")) {
-            String[] projectTask = subcommandRest[1].split(" ", 2);
-            addTask(projectTask[0], projectTask[1]);
-        }
-    }
-
-    private void addProject(String name) {
-        projects.add(new Project(name, new ArrayList<>()));
-    }
-
-    private void addTask(String projectName, String description) {
-        for(Project project : projects) {
-            if(Objects.equals(project.getProjectName(), projectName)) {
-                project.getTasks().add(new Task(nextId(), description, false));
-                return;
-            }
-        }
-        out.printf("Could not find a project with the name \"%s\".", projectName);
-        out.println();
-    }
-
-    private void check(String idString) {
-        setDone(idString, true);
-    }
-
-    private void uncheck(String idString) {
-        setDone(idString, false);
-    }
-
-    private void setDone(String idString, boolean done) {
-        int id = Integer.parseInt(idString);
-        for (Project project : projects) {
-            for (Task task : project.getTasks()) {
-                if (task.getId() == id) {
-                    task.setDone(done);
-                    return;
-                }
-            }
-        }
-        out.printf("Could not find a task with an ID of %d.", id);
-        out.println();
-    }
-
-    private void help() {
-        out.println("Commands:");
-        out.println("  show");
-        out.println("  add project <project name>");
-        out.println("  add task <project name> <task description>");
-        out.println("  check <task ID>");
-        out.println("  uncheck <task ID>");
-        out.println();
-    }
-
-    private void error(String command) {
-        out.printf("I don't know what the command \"%s\" is.", command);
-        out.println();
-    }
-
-    private long nextId() {
-        return ++lastId;
     }
 }
