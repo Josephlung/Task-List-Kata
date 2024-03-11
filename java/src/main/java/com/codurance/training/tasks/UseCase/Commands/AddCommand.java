@@ -2,20 +2,20 @@ package com.codurance.training.tasks.UseCase.Commands;
 
 import com.codurance.training.tasks.Project;
 import com.codurance.training.tasks.Task;
-import com.codurance.training.tasks.TaskList;
 
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 public class AddCommand implements Command {
     private final PrintWriter out;
     private long lastId = 0;
-    private final TaskList taskList;
+    private final List<Project> projects;
 
-    public AddCommand(TaskList taskList, PrintWriter out) {
+    public AddCommand(PrintWriter out, List<Project> projects) {
         this.out = out;
-        this.taskList = taskList;
+        this.projects = projects;
     }
     @Override
     public void executeCommand(String command) {
@@ -30,11 +30,11 @@ public class AddCommand implements Command {
     }
 
     private void addProject(String name) {
-        taskList.getProjects().add(new Project(name, new ArrayList<>()));
+        projects.add(new Project(name, new ArrayList<>()));
     }
 
     private void addTask(String projectName, String description) {
-        for(Project project : taskList.getProjects()) {
+        for(Project project : projects) {
             if(Objects.equals(project.getProjectName(), projectName)) {
                 project.getTasks().add(new Task(nextId(), description, false));
                 return;

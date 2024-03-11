@@ -10,7 +10,6 @@ import java.util.*;
 
 public final class TaskList implements Runnable {
     private static final String QUIT = "quit";
-    private final List<Project> projects = new ArrayList<>();
     private final BufferedReader in;
     private final PrintWriter out;
     private final Map<String, Command> commandMap;
@@ -25,10 +24,11 @@ public final class TaskList implements Runnable {
         this.in = reader;
         this.out = writer;
         commandMap = new HashMap<>();
-        commandMap.put("show", new ShowCommand(this, out));
-        commandMap.put("add", new AddCommand(this, out));
-        commandMap.put("check", new CheckCommand(this, out));
-        commandMap.put("uncheck", new UncheckCommand(this, out));
+        List<Project> projects = new ArrayList<>();
+        commandMap.put("show", new ShowCommand(out, projects));
+        commandMap.put("add", new AddCommand(out, projects));
+        commandMap.put("check", new CheckCommand(out, projects));
+        commandMap.put("uncheck", new UncheckCommand(out, projects));
         commandMap.put("help", new HelpCommand(out));
         commandMap.put("error", new ErrorCommand(out));
     }
@@ -48,10 +48,6 @@ public final class TaskList implements Runnable {
             }
             execute(command);
         }
-    }
-
-    public List<Project> getProjects() {
-        return projects;
     }
 
     private void execute(String commandLine) {

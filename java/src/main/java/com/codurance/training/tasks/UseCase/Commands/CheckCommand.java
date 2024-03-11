@@ -2,17 +2,17 @@ package com.codurance.training.tasks.UseCase.Commands;
 
 import com.codurance.training.tasks.Project;
 import com.codurance.training.tasks.Task;
-import com.codurance.training.tasks.TaskList;
 
 import java.io.PrintWriter;
+import java.util.List;
 
 public class CheckCommand implements Command{
     private final PrintWriter out;
-    private final TaskList taskList;
+    private final List<Project> projects;
 
-    public CheckCommand(TaskList taskList, PrintWriter out) {
+    public CheckCommand(PrintWriter out, List<Project> projects) {
         this.out = out;
-        this.taskList = taskList;
+        this.projects = projects;
     }
     @Override
     public void executeCommand(String command) {
@@ -21,7 +21,7 @@ public class CheckCommand implements Command{
 
     private void setTrue(String idString) {
         int id = Integer.parseInt(idString);
-        for (Project project : taskList.getProjects()) {
+        for (Project project : projects) {
             for (Task task : project.getTasks()) {
                 if (task.getId() == id) {
                     task.setDone(true);
