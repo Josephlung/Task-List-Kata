@@ -1,7 +1,7 @@
 package com.codurance.training.tasks.UseCase.Commands;
 
-import com.codurance.training.tasks.Project;
-import com.codurance.training.tasks.Task;
+import com.codurance.training.tasks.Entity.Project;
+import com.codurance.training.tasks.Entity.Task;
 
 import java.io.PrintWriter;
 import java.util.List;
@@ -20,11 +20,11 @@ public class ShowCommand implements Command{
         for (Project project : projects) {
             out.println(project.getProjectName());
             for (Task task : project.getTasks()) {
-                char teskStatus = ' ';
+                char taskStatus = ' ';
                 if(task.isDone()) {
-                    teskStatus = 'x';
+                    taskStatus = 'x';
                 }
-                out.printf("    [%c] %d: %s%n", teskStatus, task.getId(), task.getDescription());
+                out.printf("    [%c] %d: %s%n", taskStatus, task.getId(), task.getDescription());
             }
             out.println();
         }

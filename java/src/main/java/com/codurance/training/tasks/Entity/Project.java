@@ -1,11 +1,10 @@
-package com.codurance.training.tasks;
+package com.codurance.training.tasks.Entity;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class Project {
     private final String projectName;
-    private List<Task> tasks = new ArrayList<Task>();
+    private final List<Task> tasks;
 
     public Project(String projectName, List<Task> tasks) {
         this.projectName = projectName;

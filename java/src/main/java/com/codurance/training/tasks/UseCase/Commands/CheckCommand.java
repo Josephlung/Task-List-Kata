@@ -1,7 +1,7 @@
 package com.codurance.training.tasks.UseCase.Commands;
 
-import com.codurance.training.tasks.Project;
-import com.codurance.training.tasks.Task;
+import com.codurance.training.tasks.Entity.Project;
+import com.codurance.training.tasks.Entity.Task;
 
 import java.io.PrintWriter;
 import java.util.List;

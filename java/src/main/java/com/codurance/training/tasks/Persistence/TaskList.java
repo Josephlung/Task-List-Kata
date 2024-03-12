@@ -1,18 +1,17 @@
-package com.codurance.training.tasks;
+package com.codurance.training.tasks.Persistence;
 
-import com.codurance.training.tasks.UseCase.Commands.*;
+import com.codurance.training.tasks.InterfaceAdapter.Controller;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
-import java.util.*;
 
 public final class TaskList implements Runnable {
     private static final String QUIT = "quit";
     private final BufferedReader in;
     private final PrintWriter out;
-    private final Map<String, Command> commandMap;
+    private final Controller controller;
 
     public static void main(String[] args) throws Exception {
         BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
@@ -23,14 +22,7 @@ public final class TaskList implements Runnable {
     public TaskList(BufferedReader reader, PrintWriter writer) {
         this.in = reader;
         this.out = writer;
-        commandMap = new HashMap<>();
-        List<Project> projects = new ArrayList<>();
-        commandMap.put("show", new ShowCommand(out, projects));
-        commandMap.put("add", new AddCommand(out, projects));
-        commandMap.put("check", new CheckCommand(out, projects));
-        commandMap.put("uncheck", new UncheckCommand(out, projects));
-        commandMap.put("help", new HelpCommand(out));
-        commandMap.put("error", new ErrorCommand(out));
+        controller = new Controller(out);
     }
 
     public void run() {
@@ -51,12 +43,6 @@ public final class TaskList implements Runnable {
     }
 
     private void execute(String commandLine) {
-        String[] commandRest = commandLine.split(" ", 2);
-        Command command = commandMap.getOrDefault(commandRest[0], commandMap.get("error"));
-        if(commandRest.length > 1) {
-            command.executeCommand(commandRest[1]);
-        }else {
-            command.executeCommand(commandLine);
-        }
+        controller.execute(commandLine);
     }
 }
