@@ -3,20 +3,25 @@ package com.codurance.training.tasks.UseCase.Commands;
 import com.codurance.training.tasks.Entity.Project;
 import com.codurance.training.tasks.Entity.Task;
 
-import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
 public class AddCommand implements Command {
-    private final PrintWriter out;
     private long lastId = 0;
     private final List<Project> projects;
+    private final List<String> outputResult;
 
-    public AddCommand(PrintWriter out, List<Project> projects) {
-        this.out = out;
+    public AddCommand(List<Project> projects) {
         this.projects = projects;
+        this.outputResult = new ArrayList<>();
     }
+
+    @Override
+    public List<String> getOutputResult() {
+        return outputResult;
+    }
+
     @Override
     public void executeCommand(String command) {
         String[] subcommandRest = command.split(" ", 2);
@@ -40,8 +45,10 @@ public class AddCommand implements Command {
                 return;
             }
         }
-        out.printf("Could not find a project with the name \"%s\".", projectName);
-        out.println();
+        outputResult.add("Could not find a project with the name \"" + projectName + "\".");
+        outputResult.add("\r\n");
+        System.out.print("Could not find a project with the name \"" + projectName + "\".");
+        System.out.print("\r\n");
     }
 
     private long nextId() {

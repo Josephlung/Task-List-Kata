@@ -1,17 +1,25 @@
 package com.codurance.training.tasks.UseCase.Commands;
 
-import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.List;
 
 public class ErrorCommand implements Command{
-    private final PrintWriter out;
+    private final List<String> outputResult;
 
-    public ErrorCommand(PrintWriter out) {
-        this.out = out;
+    public ErrorCommand() {
+        this.outputResult = new ArrayList<>();
+    }
+
+    @Override
+    public List<String> getOutputResult() {
+        return outputResult;
     }
 
     @Override
     public void executeCommand(String command) {
-        out.printf("I don't know what the command \"%s\" is.", command);
-        out.println();
+        outputResult.add("I don't know what the command \"" + command + "\" is.");
+        outputResult.add("\r\n");
+        System.out.print("I don't know what the command \"" + command + "\" is.");
+        System.out.print("\r\n");
     }
 }

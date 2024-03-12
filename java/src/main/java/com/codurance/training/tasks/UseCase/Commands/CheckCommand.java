@@ -3,17 +3,23 @@ package com.codurance.training.tasks.UseCase.Commands;
 import com.codurance.training.tasks.Entity.Project;
 import com.codurance.training.tasks.Entity.Task;
 
-import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.List;
 
 public class CheckCommand implements Command{
-    private final PrintWriter out;
     private final List<Project> projects;
+    private final List<String> outputResult;
 
-    public CheckCommand(PrintWriter out, List<Project> projects) {
-        this.out = out;
+    public CheckCommand(List<Project> projects) {
         this.projects = projects;
+        this.outputResult = new ArrayList<>();
     }
+
+    @Override
+    public List<String> getOutputResult() {
+        return outputResult;
+    }
+
     @Override
     public void executeCommand(String command) {
         setTrue(command);
@@ -29,7 +35,10 @@ public class CheckCommand implements Command{
                 }
             }
         }
-        out.printf("Could not find a task with an ID of %d.", id);
-        out.println();
+        outputResult.add("Could not find a task with an ID of " + id + ".");
+        outputResult.add("\r\n");
+        System.out.print("Could not find a task with an ID of " + id + ".");
+        System.out.print("\r\n");
+
     }
 }

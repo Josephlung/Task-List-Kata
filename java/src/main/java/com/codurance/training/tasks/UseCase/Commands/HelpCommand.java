@@ -1,22 +1,36 @@
 package com.codurance.training.tasks.UseCase.Commands;
 
-import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.List;
 
 public class HelpCommand implements Command{
-    private final PrintWriter out;
+    private final List<String> outputResult;
 
-    public HelpCommand(PrintWriter out) {
-        this.out = out;
+    public HelpCommand() {
+        this.outputResult = new ArrayList<>();
+    }
+
+    @Override
+    public List<String> getOutputResult() {
+        return outputResult;
     }
 
     @Override
     public void executeCommand(String command) {
-        out.println("Commands:");
-        out.println("  show");
-        out.println("  add project <project name>");
-        out.println("  add task <project name> <task description>");
-        out.println("  check <task ID>");
-        out.println("  uncheck <task ID>");
-        out.println();
+        outputResult.add("Commands:");
+        outputResult.add("  show");
+        outputResult.add("  add project <project name>");
+        outputResult.add("  add task <project name> <task description>");
+        outputResult.add("  check <task ID>");
+        outputResult.add("  uncheck <task ID>");
+        outputResult.add("\r\n");
+
+        System.out.print("Commands:");
+        System.out.print("  show");
+        System.out.print("  add project <project name>");
+        System.out.print("  add task <project name> <task description>");
+        System.out.print("  check <task ID>");
+        System.out.print("  uncheck <task ID>");
+        System.out.print("\r\n");
     }
 }

@@ -3,30 +3,38 @@ package com.codurance.training.tasks.UseCase.Commands;
 import com.codurance.training.tasks.Entity.Project;
 import com.codurance.training.tasks.Entity.Task;
 
-import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.List;
 
 public class ShowCommand implements Command{
-    private final PrintWriter out;
     private final List<Project> projects;
+    private final List<String> outputResult;
 
-    public ShowCommand(PrintWriter out, List<Project> projects) {
-        this.out = out;
+    public ShowCommand(List<Project> projects) {
         this.projects = projects;
+        this.outputResult = new ArrayList<>();
+    }
+
+    @Override
+    public List<String> getOutputResult() {
+        return outputResult;
     }
 
     @Override
     public void executeCommand(String command) {
         for (Project project : projects) {
-            out.println(project.getProjectName());
+            outputResult.add(project.getProjectName());
+            System.out.print(project.getProjectName() + "\n");
             for (Task task : project.getTasks()) {
                 char taskStatus = ' ';
                 if(task.isDone()) {
                     taskStatus = 'x';
                 }
-                out.printf("    [%c] %d: %s%n", taskStatus, task.getId(), task.getDescription());
+                outputResult.add("    [" + taskStatus + "] " + task.getId() + ": " + task.getDescription());
+                System.out.print("    [" + taskStatus + "] " + task.getId() + ": " + task.getDescription() + "\n");
             }
-            out.println();
+            outputResult.add("\r\n");
+            System.out.print("\r\n");
         }
     }
 }
