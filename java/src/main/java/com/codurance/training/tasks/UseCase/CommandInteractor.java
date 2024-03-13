@@ -14,7 +14,7 @@ import java.util.Map;
 public class CommandInteractor {
     private Map<String, Command> commandMap;
     private final List<Project> projects;
-    private List<String> result;
+    private List<String> commandResult;
 
     public CommandInteractor() {
         projects = new ArrayList<>();
@@ -22,14 +22,14 @@ public class CommandInteractor {
     }
 
     public void execute(InputPort inputPort) {
-        String[] commandRest = inputPort.getInputData().split(" ", 2);
+        String[] commandRest = inputPort.getInputCommand().split(" ", 2);
         Command command = commandMap.getOrDefault(commandRest[0], commandMap.get("error"));
         if(commandRest.length > 1) {
             command.executeCommand(commandRest[1]);
         }else {
-            command.executeCommand(inputPort.getInputData());
+            command.executeCommand(inputPort.getInputCommand());
         }
-        result = command.getOutputResult();
+        commandResult = command.getCommandResult();
     }
 
     private void mapInit() {
@@ -43,6 +43,6 @@ public class CommandInteractor {
     }
 
     public OutputPort getResult() {
-        return new OutputData(result);
+        return new OutputData(commandResult);
     }
 }

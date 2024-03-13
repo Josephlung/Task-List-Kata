@@ -17,8 +17,6 @@ public final class TaskList implements Runnable {
     private final ConsoleOutput consoleOutput;
     private final Controller controller;
     private final Presenter presenter;
-    private final CommandInteractor commandInteractor;
-
 
     public static void main(String[] args) throws Exception {
         BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
@@ -29,7 +27,7 @@ public final class TaskList implements Runnable {
     public TaskList(BufferedReader reader, PrintWriter writer) {
         consoleInput = new ConsoleInput(reader);
         consoleOutput = new ConsoleOutput(writer);
-        commandInteractor = new CommandInteractor();
+        CommandInteractor commandInteractor = new CommandInteractor();
         controller = new Controller(commandInteractor);
         presenter = new Presenter(commandInteractor);
     }
@@ -52,6 +50,6 @@ public final class TaskList implements Runnable {
 
     private void execute(String commandLine) {
         controller.execute(commandLine);
-        consoleOutput.setOutputQueue(presenter.getOutputData().getOutputData());
+        consoleOutput.setOutputQueue(presenter.getOutputData().getOutputResult());
     }
 }

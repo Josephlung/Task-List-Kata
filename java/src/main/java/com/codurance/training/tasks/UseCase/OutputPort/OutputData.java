@@ -8,7 +8,7 @@ public class OutputData implements OutputPort{
         this.result = result;
     }
     @Override
-    public List<String> getOutputData() {
+    public List<String> getOutputResult() {
         return result;
     }
 }

@@ -4,5 +4,5 @@ import java.util.List;
 
 public interface OutputPort {
 
-    List<String> getOutputData();
+    List<String> getOutputResult();
 }

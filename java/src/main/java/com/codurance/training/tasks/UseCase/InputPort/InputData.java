@@ -7,7 +7,7 @@ public class InputData implements InputPort{
         this.inputData = inputData;
     }
     @Override
-    public String getInputData() {
+    public String getInputCommand() {
         return inputData;
     }
 }
