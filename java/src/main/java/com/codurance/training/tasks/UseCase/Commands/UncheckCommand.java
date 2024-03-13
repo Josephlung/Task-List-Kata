@@ -17,7 +17,7 @@ public class UncheckCommand implements Command{
 
     @Override
     public List<String> getOutputResult() {
-        return null;
+        return outputResult;
     }
 
     @Override

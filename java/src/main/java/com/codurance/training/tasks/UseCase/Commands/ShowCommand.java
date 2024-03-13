@@ -23,13 +23,13 @@ public class ShowCommand implements Command{
     public void executeCommand(String command) {
         outputResult = new ArrayList<>();
         for (Project project : projects) {
-            outputResult.add(project.getProjectName());
+            outputResult.add(project.getProjectName() + "\r\n");
             for (Task task : project.getTasks()) {
                 char taskStatus = ' ';
                 if(task.isDone()) {
                     taskStatus = 'x';
                 }
-                outputResult.add("    [" + taskStatus + "] " + task.getId() + ": " + task.getDescription());
+                outputResult.add("    [" + taskStatus + "] " + task.getId() + ": " + task.getDescription() + "\r\n");
             }
             outputResult.add("\r\n");
         }

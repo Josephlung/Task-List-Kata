@@ -16,7 +16,7 @@ public class ConsoleOutput {
     }
     public void setOutputQueue(List<String> commandResult) {
         for(String result: commandResult){
-            out.println(result);
+            out.print(result);
         }
     }
 }
