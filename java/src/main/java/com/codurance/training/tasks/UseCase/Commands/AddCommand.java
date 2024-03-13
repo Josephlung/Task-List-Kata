@@ -10,11 +10,10 @@ import java.util.Objects;
 public class AddCommand implements Command {
     private long lastId = 0;
     private final List<Project> projects;
-    private final List<String> outputResult;
+    private List<String> outputResult;
 
     public AddCommand(List<Project> projects) {
         this.projects = projects;
-        this.outputResult = new ArrayList<>();
     }
 
     @Override
@@ -24,6 +23,7 @@ public class AddCommand implements Command {
 
     @Override
     public void executeCommand(String command) {
+        outputResult = new ArrayList<>();
         String[] subcommandRest = command.split(" ", 2);
         String subcommand = subcommandRest[0];
         if (subcommand.equals("project")) {
@@ -47,8 +47,6 @@ public class AddCommand implements Command {
         }
         outputResult.add("Could not find a project with the name \"" + projectName + "\".");
         outputResult.add("\r\n");
-        System.out.print("Could not find a project with the name \"" + projectName + "\".");
-        System.out.print("\r\n");
     }
 
     private long nextId() {

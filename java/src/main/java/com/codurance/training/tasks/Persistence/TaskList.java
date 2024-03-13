@@ -1,8 +1,10 @@
 package com.codurance.training.tasks.Persistence;
 
 import com.codurance.training.tasks.InterfaceAdapter.Controller;
+import com.codurance.training.tasks.InterfaceAdapter.Presenter;
 import com.codurance.training.tasks.Persistence.Console.ConsoleInput;
 import com.codurance.training.tasks.Persistence.Console.ConsoleOutput;
+import com.codurance.training.tasks.UseCase.CommandInteractor;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -14,6 +16,9 @@ public final class TaskList implements Runnable {
     private final ConsoleInput consoleInput;
     private final ConsoleOutput consoleOutput;
     private final Controller controller;
+    private final Presenter presenter;
+    private final CommandInteractor commandInteractor;
+
 
     public static void main(String[] args) throws Exception {
         BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
@@ -24,7 +29,9 @@ public final class TaskList implements Runnable {
     public TaskList(BufferedReader reader, PrintWriter writer) {
         consoleInput = new ConsoleInput(reader);
         consoleOutput = new ConsoleOutput(writer);
-        controller = new Controller();
+        commandInteractor = new CommandInteractor();
+        controller = new Controller(commandInteractor);
+        presenter = new Presenter(commandInteractor);
     }
 
     public void run() {
@@ -45,5 +52,6 @@ public final class TaskList implements Runnable {
 
     private void execute(String commandLine) {
         controller.execute(commandLine);
+        consoleOutput.setOutputQueue(presenter.getOutputData().getOutputData());
     }
 }

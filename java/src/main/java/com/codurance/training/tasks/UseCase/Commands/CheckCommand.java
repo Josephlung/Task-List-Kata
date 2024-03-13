@@ -37,8 +37,5 @@ public class CheckCommand implements Command{
         }
         outputResult.add("Could not find a task with an ID of " + id + ".");
         outputResult.add("\r\n");
-        System.out.print("Could not find a task with an ID of " + id + ".");
-        System.out.print("\r\n");
-
     }
 }

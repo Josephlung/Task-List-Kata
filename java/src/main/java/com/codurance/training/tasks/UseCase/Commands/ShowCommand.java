@@ -8,11 +8,10 @@ import java.util.List;
 
 public class ShowCommand implements Command{
     private final List<Project> projects;
-    private final List<String> outputResult;
+    private List<String> outputResult;
 
     public ShowCommand(List<Project> projects) {
         this.projects = projects;
-        this.outputResult = new ArrayList<>();
     }
 
     @Override
@@ -22,19 +21,17 @@ public class ShowCommand implements Command{
 
     @Override
     public void executeCommand(String command) {
+        outputResult = new ArrayList<>();
         for (Project project : projects) {
             outputResult.add(project.getProjectName());
-            System.out.print(project.getProjectName() + "\n");
             for (Task task : project.getTasks()) {
                 char taskStatus = ' ';
                 if(task.isDone()) {
                     taskStatus = 'x';
                 }
                 outputResult.add("    [" + taskStatus + "] " + task.getId() + ": " + task.getDescription());
-                System.out.print("    [" + taskStatus + "] " + task.getId() + ": " + task.getDescription() + "\n");
             }
             outputResult.add("\r\n");
-            System.out.print("\r\n");
         }
     }
 }

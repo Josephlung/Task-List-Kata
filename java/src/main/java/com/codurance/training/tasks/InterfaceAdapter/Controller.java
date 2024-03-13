@@ -6,8 +6,8 @@ import com.codurance.training.tasks.UseCase.InputPort.InputPort;
 
 public class Controller {
     private final CommandInteractor commandInteractor;
-    public Controller() {
-        commandInteractor = new CommandInteractor();
+    public Controller(CommandInteractor commandInteractor) {
+        this.commandInteractor = commandInteractor;
     }
 
     public void execute(String commandLine) {

@@ -19,7 +19,5 @@ public class ErrorCommand implements Command{
     public void executeCommand(String command) {
         outputResult.add("I don't know what the command \"" + command + "\" is.");
         outputResult.add("\r\n");
-        System.out.print("I don't know what the command \"" + command + "\" is.");
-        System.out.print("\r\n");
     }
 }
