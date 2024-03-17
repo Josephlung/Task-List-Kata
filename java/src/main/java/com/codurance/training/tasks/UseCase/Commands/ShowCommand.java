@@ -8,20 +8,13 @@ import java.util.List;
 
 public class ShowCommand implements Command{
     private final List<Project> projects;
-    private List<String> outputResult;
-
     public ShowCommand(List<Project> projects) {
         this.projects = projects;
     }
 
     @Override
-    public List<String> getCommandResult() {
-        return outputResult;
-    }
-
-    @Override
-    public void executeCommand(String command) {
-        outputResult = new ArrayList<>();
+    public List<String> executeCommand(String command) {
+        List<String> outputResult = new ArrayList<>();
         for (Project project : projects) {
             outputResult.add(project.getProjectName() + "\r\n");
             for (Task task : project.getTasks()) {
@@ -33,5 +26,6 @@ public class ShowCommand implements Command{
             }
             outputResult.add("\r\n");
         }
+        return outputResult;
     }
 }

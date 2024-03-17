@@ -4,20 +4,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ErrorCommand implements Command{
-    private final List<String> outputResult;
-
     public ErrorCommand() {
-        this.outputResult = new ArrayList<>();
     }
 
     @Override
-    public List<String> getCommandResult() {
-        return outputResult;
-    }
-
-    @Override
-    public void executeCommand(String command) {
+    public List<String> executeCommand(String command) {
+        List<String> outputResult = new ArrayList<>();
         outputResult.add("I don't know what the command \"" + command + "\" is.");
         outputResult.add("\r\n");
+        return outputResult;
     }
 }

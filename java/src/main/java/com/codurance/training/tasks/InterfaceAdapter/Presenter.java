@@ -1,15 +1,16 @@
 package com.codurance.training.tasks.InterfaceAdapter;
 
-import com.codurance.training.tasks.UseCase.CommandInteractor;
 import com.codurance.training.tasks.UseCase.OutputPort.OutputPort;
 
+import java.util.List;
+
 public class Presenter {
-    private final CommandInteractor commandInteractor;
-    public Presenter(CommandInteractor commandInteractor) {
-        this.commandInteractor = commandInteractor;
+    private final OutputPort outputData;
+    public Presenter(OutputPort outputData) {
+        this.outputData = outputData;
     }
 
-    public OutputPort getOutputData() {
-        return commandInteractor.getResult();
+    public List<String> getResult() {
+        return outputData.getOutputResult();
     }
 }

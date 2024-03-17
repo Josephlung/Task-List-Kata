@@ -8,34 +8,29 @@ import java.util.List;
 
 public class UncheckCommand implements Command{
     private final List<Project> projects;
-    private final List<String> outputResult;
 
     public UncheckCommand(List<Project> projects) {
         this.projects = projects;
-        this.outputResult = new ArrayList<>();
     }
 
     @Override
-    public List<String> getCommandResult() {
-        return outputResult;
+    public List<String> executeCommand(String command) {
+        return setFalse(command);
     }
 
-    @Override
-    public void executeCommand(String command) {
-        setFalse(command);
-    }
-
-    private void setFalse(String idString) {
+    private List<String> setFalse(String idString) {
+        List<String> outputResult = new ArrayList<>();
         int id = Integer.parseInt(idString);
         for (Project project : projects) {
             for (Task task : project.getTasks()) {
                 if (task.getId() == id) {
                     task.setDone(false);
-                    return;
+                    return outputResult;
                 }
             }
         }
         outputResult.add("Could not find a task with an ID of " + id + ".");
         outputResult.add("\r\n");
+        return outputResult;
     }
 }

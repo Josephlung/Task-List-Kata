@@ -8,34 +8,29 @@ import java.util.List;
 
 public class CheckCommand implements Command{
     private final List<Project> projects;
-    private final List<String> outputResult;
 
     public CheckCommand(List<Project> projects) {
         this.projects = projects;
-        this.outputResult = new ArrayList<>();
     }
 
     @Override
-    public List<String> getCommandResult() {
-        return outputResult;
+    public List<String> executeCommand(String command) {
+        return setTrue(command);
     }
 
-    @Override
-    public void executeCommand(String command) {
-        setTrue(command);
-    }
-
-    private void setTrue(String idString) {
+    private List<String> setTrue(String idString) {
+        List<String> outputResult = new ArrayList<>();
         int id = Integer.parseInt(idString);
         for (Project project : projects) {
             for (Task task : project.getTasks()) {
                 if (task.getId() == id) {
                     task.setDone(true);
-                    return;
+                    return outputResult;
                 }
             }
         }
         outputResult.add("Could not find a task with an ID of " + id + ".");
         outputResult.add("\r\n");
+        return outputResult;
     }
 }

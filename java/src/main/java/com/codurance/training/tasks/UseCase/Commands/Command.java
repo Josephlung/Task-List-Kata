@@ -4,6 +4,5 @@ import java.util.List;
 
 public interface Command {
 
-    List<String> getCommandResult();
-    void executeCommand(String command);
+    List<String> executeCommand(String command);
 }

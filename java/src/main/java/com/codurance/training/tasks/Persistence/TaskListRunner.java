@@ -4,32 +4,30 @@ import com.codurance.training.tasks.InterfaceAdapter.Controller;
 import com.codurance.training.tasks.InterfaceAdapter.Presenter;
 import com.codurance.training.tasks.Persistence.Console.ConsoleInput;
 import com.codurance.training.tasks.Persistence.Console.ConsoleOutput;
-import com.codurance.training.tasks.UseCase.CommandInteractor;
+import com.codurance.training.tasks.InterfaceAdapter.CommandExecutor;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
 
-public final class TaskList implements Runnable {
+public final class TaskListRunner implements Runnable {
     private static final String QUIT = "quit";
     private final ConsoleInput consoleInput;
     private final ConsoleOutput consoleOutput;
     private final Controller controller;
-    private final Presenter presenter;
 
     public static void main(String[] args) throws Exception {
         BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
         PrintWriter out = new PrintWriter(System.out);
-        new TaskList(in, out).run();
+        new TaskListRunner(in, out).run();
     }
 
-    public TaskList(BufferedReader reader, PrintWriter writer) {
+    public TaskListRunner(BufferedReader reader, PrintWriter writer) {
         consoleInput = new ConsoleInput(reader);
         consoleOutput = new ConsoleOutput(writer);
-        CommandInteractor commandInteractor = new CommandInteractor();
-        controller = new Controller(commandInteractor);
-        presenter = new Presenter(commandInteractor);
+        CommandExecutor commandExecutor = new CommandExecutor();
+        controller = new Controller(commandExecutor);
     }
 
     public void run() {
@@ -49,7 +47,7 @@ public final class TaskList implements Runnable {
     }
 
     private void execute(String commandLine) {
-        controller.execute(commandLine);
-        consoleOutput.setOutputQueue(presenter.getOutputData().getOutputResult());
+        Presenter presenter = new Presenter(controller.execute(commandLine));
+        consoleOutput.setOutputQueue(presenter.getResult());
     }
 }
