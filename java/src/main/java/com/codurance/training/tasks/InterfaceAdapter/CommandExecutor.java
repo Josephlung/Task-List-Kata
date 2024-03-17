@@ -3,8 +3,6 @@ package com.codurance.training.tasks.InterfaceAdapter;
 import com.codurance.training.tasks.Entity.Project;
 import com.codurance.training.tasks.UseCase.Commands.*;
 import com.codurance.training.tasks.UseCase.InputPort.InputPort;
-import com.codurance.training.tasks.UseCase.OutputPort.OutputData;
-import com.codurance.training.tasks.UseCase.OutputPort.OutputPort;
 
 import java.util.ArrayList;
 import java.util.HashMap;

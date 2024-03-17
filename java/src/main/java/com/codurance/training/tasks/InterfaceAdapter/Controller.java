@@ -5,8 +5,6 @@ import com.codurance.training.tasks.UseCase.InputPort.InputPort;
 import com.codurance.training.tasks.UseCase.OutputPort.OutputData;
 import com.codurance.training.tasks.UseCase.OutputPort.OutputPort;
 
-import java.util.List;
-
 public class Controller {
     private final CommandExecutor commandExecutor;
     public Controller(CommandExecutor commandExecutor) {
