@@ -17,33 +17,4 @@
 
 3. Create Interfaces `InputPort` and `OutputPort` to pass input and output between Interface Adapter Layer and Use Case Layer.
 
-4. Create class `CommandInteractor` to invoke commands.
-
-5. Rearrange classes
-   -  **Entity**
-        -    Task
-        -    Project
-    -  **UseCase**
-        -    CommandInteractor
-        -    **Commands**
-             - *Command*
-             - AddCommand
-             - ErrorCommand
-             - HelpCommand
-             - ShowCommand
-             - UncheckCommand
-             - CheckCommand
-        -    **InputPort**
-             -    *InputPort*
-             -    InputData
-        -    **OutputPort**
-             -    *OutputPort*
-             -    OutputData
-    -  **InterfaceAdapter**
-        -    Controller
-        -    Presenter
-    -  **Persistence**
-        -    **Console**
-             -    ConsoleInput
-             -    ConsoleOutput
-        -    TaskList
+4. Create class `CommandExecutor` to invoke commands.
