@@ -2,7 +2,6 @@ package com.codurance.training.tasks.UseCase.Commands;
 
 import com.codurance.training.tasks.Entity.ProjectName;
 import com.codurance.training.tasks.Entity.Projects;
-import com.codurance.training.tasks.Entity.Task;
 
 import java.util.ArrayList;
 import java.util.List;
