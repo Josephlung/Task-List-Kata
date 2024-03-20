@@ -11,19 +11,11 @@ public class Projects {
     public List<Project> getProjects() {
         return projects;
     }
-    public List<Task> getTasks(ProjectName projectName){
-        for(Project project: projects){
-            if(project.getProjectName().equals(projectName)){
-                return project.getTasks();
-            }
-        }
-        return null;
-    }
 
     public void addTask(ProjectName projectName, String description, boolean done){
         for(Project project : projects) {
             if(Objects.equals(project.getProjectName(), projectName)) {
-                project.getTasks().add(new Task(nextId(), description, false));
+                project.getTasks().add(new Task(nextId(), description, done));
             }
         }
     }

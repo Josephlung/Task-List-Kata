@@ -1,13 +1,11 @@
 package com.codurance.training.tasks.UseCase.Commands;
 
-import com.codurance.training.tasks.Entity.Project;
 import com.codurance.training.tasks.Entity.ProjectName;
 import com.codurance.training.tasks.Entity.Projects;
 import com.codurance.training.tasks.Entity.Task;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 public class AddCommand implements Command {
     private final Projects projects;
@@ -30,7 +28,7 @@ public class AddCommand implements Command {
     }
 
     private void addProject(ProjectName name) {
-        projects.addProject(name, new ArrayList<Task>());
+        projects.addProject(name, new ArrayList<>());
     }
 
     private List<String> addTask(ProjectName projectName, String description) {

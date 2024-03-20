@@ -4,7 +4,6 @@ import com.codurance.training.tasks.Entity.Projects;
 import com.codurance.training.tasks.UseCase.Commands.*;
 import com.codurance.training.tasks.UseCase.InputPort.InputPort;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
