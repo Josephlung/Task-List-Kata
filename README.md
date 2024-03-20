@@ -20,4 +20,6 @@
 4. Create class `CommandExecutor` to invoke commands.
 
 **HW3**
-1. Extract class `ProjectName` and `Project` to Entity Package.
+1. Extract class `Tasks` and `Projects` to Entity Package.
+
+2. Create record `ProjectName` in Entity Package.
