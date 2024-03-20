@@ -16,7 +16,7 @@ public class ShowCommand implements Command{
     public List<String> executeCommand(String command) {
         List<String> outputResult = new ArrayList<>();
         for (Project project : projects) {
-            outputResult.add(project.getProjectName() + "\r\n");
+            outputResult.add(project.getProjectName().toString() + "\r\n");
             for (Task task : project.getTasks()) {
                 char taskStatus = ' ';
                 if(task.isDone()) {

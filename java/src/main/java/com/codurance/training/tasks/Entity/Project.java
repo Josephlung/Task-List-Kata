@@ -3,15 +3,15 @@ package com.codurance.training.tasks.Entity;
 import java.util.List;
 
 public class Project {
-    private final String projectName;
+    private final ProjectName projectName;
     private final List<Task> tasks;
 
-    public Project(String projectName, List<Task> tasks) {
+    public Project(ProjectName projectName, List<Task> tasks) {
         this.projectName = projectName;
         this.tasks = tasks;
     }
 
-    public String getProjectName() {
+    public ProjectName getProjectName() {
         return projectName;
     }
 

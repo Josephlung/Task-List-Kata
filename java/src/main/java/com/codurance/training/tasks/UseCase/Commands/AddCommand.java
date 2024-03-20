@@ -1,6 +1,7 @@
 package com.codurance.training.tasks.UseCase.Commands;
 
 import com.codurance.training.tasks.Entity.Project;
+import com.codurance.training.tasks.Entity.ProjectName;
 import com.codurance.training.tasks.Entity.Task;
 
 import java.util.ArrayList;
@@ -20,19 +21,19 @@ public class AddCommand implements Command {
         String[] subcommandRest = command.split(" ", 2);
         String subcommand = subcommandRest[0];
         if (subcommand.equals("project")) {
-            addProject(subcommandRest[1]);
+            addProject(ProjectName.of(subcommandRest[1]));
         } else if (subcommand.equals("task")) {
             String[] projectTask = subcommandRest[1].split(" ", 2);
-            outputResult = addTask(projectTask[0], projectTask[1]);
+            outputResult = addTask(ProjectName.of(projectTask[0]), projectTask[1]);
         }
         return  outputResult;
     }
 
-    private void addProject(String name) {
+    private void addProject(ProjectName name) {
         projects.add(new Project(name, new ArrayList<>()));
     }
 
-    private List<String> addTask(String projectName, String description) {
+    private List<String> addTask(ProjectName projectName, String description) {
         List<String> outputResult = new ArrayList<>();
         for(Project project : projects) {
             if(Objects.equals(project.getProjectName(), projectName)) {
