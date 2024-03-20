@@ -1,7 +1,6 @@
 package com.codurance.training.tasks.InterfaceAdapter;
 
 import com.codurance.training.tasks.UseCase.OutputPort.OutputPort;
-
 import java.util.List;
 
 public class Presenter {

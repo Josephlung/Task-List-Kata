@@ -9,7 +9,6 @@ import java.util.List;
 
 public class UncheckCommand implements Command{
     private final Projects projects;
-
     public UncheckCommand(Projects projects) {
         this.projects = projects;
     }

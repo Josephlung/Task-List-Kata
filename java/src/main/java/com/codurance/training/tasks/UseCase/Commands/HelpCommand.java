@@ -5,7 +5,6 @@ import java.util.List;
 
 public class HelpCommand implements Command{
     public HelpCommand() {
-
     }
     @Override
     public List<String> executeCommand(String command) {
