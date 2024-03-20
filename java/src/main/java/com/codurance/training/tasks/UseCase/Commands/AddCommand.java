@@ -2,6 +2,7 @@ package com.codurance.training.tasks.UseCase.Commands;
 
 import com.codurance.training.tasks.Entity.Project;
 import com.codurance.training.tasks.Entity.ProjectName;
+import com.codurance.training.tasks.Entity.Projects;
 import com.codurance.training.tasks.Entity.Task;
 
 import java.util.ArrayList;
@@ -9,9 +10,8 @@ import java.util.List;
 import java.util.Objects;
 
 public class AddCommand implements Command {
-    private long lastId = 0;
-    private final List<Project> projects;
-    public AddCommand(List<Project> projects) {
+    private final Projects projects;
+    public AddCommand(Projects projects) {
         this.projects = projects;
     }
 
@@ -30,23 +30,17 @@ public class AddCommand implements Command {
     }
 
     private void addProject(ProjectName name) {
-        projects.add(new Project(name, new ArrayList<>()));
+        projects.addProject(name, new ArrayList<Task>());
     }
 
     private List<String> addTask(ProjectName projectName, String description) {
         List<String> outputResult = new ArrayList<>();
-        for(Project project : projects) {
-            if(Objects.equals(project.getProjectName(), projectName)) {
-                project.getTasks().add(new Task(nextId(), description, false));
-                return outputResult;
-            }
+        if(projects.hasProjectName(projectName)) {
+            projects.addTask(projectName, description, false);
+            return outputResult;
         }
         outputResult.add("Could not find a project with the name \"" + projectName + "\".");
         outputResult.add("\r\n");
         return outputResult;
-    }
-
-    private long nextId() {
-        return ++lastId;
     }
 }

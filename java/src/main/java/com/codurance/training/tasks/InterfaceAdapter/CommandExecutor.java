@@ -1,6 +1,6 @@
 package com.codurance.training.tasks.InterfaceAdapter;
 
-import com.codurance.training.tasks.Entity.Project;
+import com.codurance.training.tasks.Entity.Projects;
 import com.codurance.training.tasks.UseCase.Commands.*;
 import com.codurance.training.tasks.UseCase.InputPort.InputPort;
 
@@ -10,11 +10,11 @@ import java.util.List;
 import java.util.Map;
 
 public class CommandExecutor {
+    private final Projects projects;
     private Map<String, Command> commandMap;
-    private final List<Project> projects;
 
     public CommandExecutor() {
-        projects = new ArrayList<>();
+        projects = new Projects();
         mapInit();
     }
 
