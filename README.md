@@ -18,3 +18,6 @@
 3. Create Interfaces `InputPort` and `OutputPort` to pass input and output between Interface Adapter Layer and Use Case Layer.
 
 4. Create class `CommandExecutor` to invoke commands.
+
+**HW3**
+1. Extract class `ProjectName` and `Project` to Entity Package.
