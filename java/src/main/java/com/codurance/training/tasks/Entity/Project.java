@@ -1,7 +1,5 @@
 package com.codurance.training.tasks.Entity;
 
-import java.util.List;
-
 public class Project {
     private final ProjectName projectName;
     private final Tasks tasks;
