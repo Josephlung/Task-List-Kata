@@ -20,13 +20,14 @@ public class Projects {
         }
     }
 
-    public void addProject(ProjectName projectName, List<Task> tasks){
+    public void addProject(ProjectName projectName, Tasks tasks){
         this.projects.add(new Project(projectName, tasks));
     }
 
     public long nextId() {
         return ++lastId;
     }
+
     public boolean hasProjectName(ProjectName projectName){
         for(Project project: projects){
             if(project.getProjectName().equals(projectName)){

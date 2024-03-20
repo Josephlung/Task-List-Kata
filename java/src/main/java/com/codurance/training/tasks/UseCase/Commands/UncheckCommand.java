@@ -22,7 +22,7 @@ public class UncheckCommand implements Command{
         List<String> outputResult = new ArrayList<>();
         int id = Integer.parseInt(idString);
         for (Project project : projects.getProjects()) {
-            for (Task task : project.getTasks()) {
+            for (Task task : project.getTasks().getTasks()) {
                 if (task.getId() == id) {
                     task.setDone(false);
                     return outputResult;

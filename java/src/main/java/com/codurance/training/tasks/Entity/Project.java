@@ -4,9 +4,9 @@ import java.util.List;
 
 public class Project {
     private final ProjectName projectName;
-    private final List<Task> tasks;
+    private final Tasks tasks;
 
-    public Project(ProjectName projectName, List<Task> tasks) {
+    public Project(ProjectName projectName, Tasks tasks) {
         this.projectName = projectName;
         this.tasks = tasks;
     }
@@ -15,7 +15,7 @@ public class Project {
         return projectName;
     }
 
-    public List<Task> getTasks() {
+    public Tasks getTasks() {
         return tasks;
     }
 }
