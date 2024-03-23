@@ -24,7 +24,7 @@ public class AddCommand implements Command {
             String[] projectTask = subcommandRest[1].split(" ", 2);
             outputResult = addTask(ProjectName.of(projectTask[0]), projectTask[1]);
         }
-        return  outputResult;
+        return outputResult;
     }
 
     private void addProject(ProjectName name) {

@@ -21,7 +21,7 @@ public class UncheckCommand implements Command{
         List<String> outputResult = new ArrayList<>();
         int id = Integer.parseInt(idString);
         for (Project project : projects.getProjects()) {
-            for (Task task : project.getTasks().getTasks()) {
+            for (Task task : project.getTasks().getTasList()) {
                 if (task.getId() == id) {
                     task.setDone(false);
                     return outputResult;

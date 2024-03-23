@@ -1,15 +1,13 @@
 package com.codurance.training.tasks.Entity;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 
 public class Projects {
     private final List<Project> projects = new ArrayList<>();
     private static long lastId = 0;
 
     public List<Project> getProjects() {
-        return projects;
+        return Collections.unmodifiableList(projects);
     }
 
     public void addTask(ProjectName projectName, String description, boolean done){
