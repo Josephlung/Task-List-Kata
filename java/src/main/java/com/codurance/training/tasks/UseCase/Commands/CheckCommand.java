@@ -7,7 +7,6 @@ import com.codurance.training.tasks.Entity.TaskId;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 public class CheckCommand implements Command{
     private final Projects projects;
