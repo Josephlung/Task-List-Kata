@@ -23,3 +23,10 @@
 1. Extract class `Tasks` and `Projects` to Entity Package.
 
 2. Create record `ProjectName` in Entity Package.
+
+**HW4**
+1. Create record `TaskId` in Entity Package.
+
+2. Create `UseCaseInteractor` and implement `InputBoundary`.
+
+3. Add Collections.unmodifiableList() in Projects class and Tasks class avoid to break encapsulation. 
