@@ -1,11 +1,10 @@
-package com.codurance.training.tasks.UseCase.InputPort;
+package com.codurance.training.tasks.UseCase;
 
-public class InputData implements InputPort{
+public class InputData{
     String inputData;
     public  InputData(String inputData) {
         this.inputData = inputData;
     }
-    @Override
     public String getInputCommand() {
         return inputData;
     }

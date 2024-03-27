@@ -1,29 +1,28 @@
-package com.codurance.training.tasks.InterfaceAdapter;
+package com.codurance.training.tasks.UseCase;
 
 import com.codurance.training.tasks.Entity.Projects;
 import com.codurance.training.tasks.UseCase.Commands.*;
-import com.codurance.training.tasks.UseCase.InputPort.InputPort;
+import com.codurance.training.tasks.UseCase.InputBoundary.InputBoundary;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class CommandExecutor {
+public class UseCaseInteractor implements InputBoundary {
     private final Projects projects;
     private Map<String, Command> commandMap;
 
-    public CommandExecutor() {
+    public UseCaseInteractor() {
         projects = new Projects();
         mapInit();
     }
-
-    public List<String> execute(InputPort inputPort) {
-        String[] commandRest = inputPort.getInputCommand().split(" ", 2);
+    public List<String> execute(InputData inputData) {
+        String[] commandRest = inputData.getInputCommand().split(" ", 2);
         Command command = commandMap.getOrDefault(commandRest[0], commandMap.get("error"));
         if(commandRest.length > 1) {
             return command.executeCommand(commandRest[1]);
         }else {
-            return command.executeCommand(inputPort.getInputCommand());
+            return command.executeCommand(inputData.getInputCommand());
         }
     }
 

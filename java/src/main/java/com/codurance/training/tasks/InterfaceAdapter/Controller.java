@@ -1,18 +1,17 @@
 package com.codurance.training.tasks.InterfaceAdapter;
 
-import com.codurance.training.tasks.UseCase.InputPort.InputData;
-import com.codurance.training.tasks.UseCase.InputPort.InputPort;
-import com.codurance.training.tasks.UseCase.OutputPort.OutputData;
-import com.codurance.training.tasks.UseCase.OutputPort.OutputPort;
+import com.codurance.training.tasks.UseCase.InputBoundary.InputBoundary;
+import com.codurance.training.tasks.UseCase.InputData;
+import com.codurance.training.tasks.UseCase.OutputData;
 
 public class Controller {
-    private final CommandExecutor commandExecutor;
-    public Controller(CommandExecutor commandExecutor) {
-        this.commandExecutor = commandExecutor;
+    private final InputBoundary useCaseInteractor;
+    public Controller(InputBoundary useCaseInteractor) {
+        this.useCaseInteractor = useCaseInteractor;
     }
 
-    public OutputPort execute(String commandLine) {
-        InputPort inputPort = new InputData(commandLine);
-        return new OutputData(commandExecutor.execute(inputPort));
+    public OutputData execute(String commandLine) {
+        InputData inputData = new InputData(commandLine);
+        return new OutputData(useCaseInteractor.execute(inputData));
     }
 }
