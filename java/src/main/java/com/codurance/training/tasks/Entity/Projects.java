@@ -13,7 +13,7 @@ public class Projects {
     public void addTask(ProjectName projectName, String description, boolean done){
         for(Project project : projects) {
             if(Objects.equals(project.getProjectName(), projectName)) {
-                project.getTasks().add(new Task(nextId(), description, done));
+                project.addTask(new Task(nextId(), description, done));
             }
         }
     }

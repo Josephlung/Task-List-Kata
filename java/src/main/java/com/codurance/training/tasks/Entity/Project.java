@@ -16,4 +16,8 @@ public class Project {
     public Tasks getTasks() {
         return tasks;
     }
+
+    public void addTask(Task task) {
+        tasks.addTask(task);
+    }
 }

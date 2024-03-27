@@ -11,7 +11,7 @@ public class Tasks {
         return Collections.unmodifiableList(tasks);
     }
 
-    public void add(Task task) {
+    public void addTask(Task task) {
         tasks.add(task);
     }
 }
