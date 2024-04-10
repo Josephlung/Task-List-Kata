@@ -29,4 +29,11 @@
 
 2. Create `UseCaseInteractor` and implement `InputBoundary`.
 
-3. Add Collections.unmodifiableList() in Projects class and Tasks class avoid to break encapsulation. 
+3. Add Collections.unmodifiableList() in Projects class and Tasks class avoid to break encapsulation.
+
+**HW5**
+1. Apply DDD tactical designs to the entities layer.
+
+2. Enforce aggregate invariants by implementing ReadOnly subtypes for Project and Task.
+
+3. Create class `ReadOnlyTask` and `ReadOnlyProject`.
