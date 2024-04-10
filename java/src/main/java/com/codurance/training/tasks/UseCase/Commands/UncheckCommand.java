@@ -1,11 +1,6 @@
 package com.codurance.training.tasks.UseCase.Commands;
 
-import com.codurance.training.tasks.Entity.Project;
 import com.codurance.training.tasks.Entity.Projects;
-import com.codurance.training.tasks.Entity.Task;
-import com.codurance.training.tasks.Entity.TaskId;
-
-import java.util.ArrayList;
 import java.util.List;
 
 public class UncheckCommand implements Command{
