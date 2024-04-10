@@ -2,12 +2,23 @@ package com.codurance.training.tasks.Entity;
 
 import java.util.*;
 
-public class Projects {
-    private final List<Project> projects = new ArrayList<>();
+import tw.teddysoft.ezddd.core.entity.AggregateRoot;
+import tw.teddysoft.ezddd.core.entity.DomainEvent;
+
+public class Projects extends AggregateRoot<ProjectsId, DomainEvent>{
+    private final List<Project> projects;
     private static TaskId lastId = new TaskId(0);
+    private final ProjectsId id;
+
+    public Projects(ProjectsId id) {
+        this.id = id;
+        this.projects = new ArrayList<>();
+    }
 
     public List<Project> getProjects() {
-        return Collections.unmodifiableList(projects);
+        return projects.stream()
+                .map(p -> (Project) new ReadOnlyProject(p.getProjectName(), p.getTasks()))
+                .toList();
     }
 
     public void addTask(ProjectName projectName, String description, boolean done){
@@ -34,5 +45,21 @@ public class Projects {
             }
         }
         return false;
+    }
+
+    public List<String> setDone(String idString, boolean done) {
+        List<String> outputResult = new ArrayList<>();
+        for (Project project : projects) {
+            outputResult = project.setDone(idString, done);
+            if(outputResult == null) {
+                return new ArrayList<>();
+            }
+        }
+        return outputResult;
+    }
+
+    @Override
+    public ProjectsId getId() {
+        return id;
     }
 }

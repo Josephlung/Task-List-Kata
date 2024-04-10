@@ -1,6 +1,7 @@
 package com.codurance.training.tasks.UseCase;
 
 import com.codurance.training.tasks.Entity.Projects;
+import com.codurance.training.tasks.Entity.ProjectsId;
 import com.codurance.training.tasks.UseCase.Commands.*;
 import com.codurance.training.tasks.UseCase.InputBoundary.InputBoundary;
 
@@ -11,9 +12,9 @@ import java.util.Map;
 public class UseCaseInteractor implements InputBoundary {
     private final Projects projects;
     private Map<String, Command> commandMap;
-
+    private static final ProjectsId DEFAULT_PROJECTS_ID = ProjectsId.of("001");
     public UseCaseInteractor() {
-        projects = new Projects();
+        projects = new Projects(DEFAULT_PROJECTS_ID);
         mapInit();
     }
     public List<String> execute(InputData inputData) {

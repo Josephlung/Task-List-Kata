@@ -20,6 +20,12 @@
             <version>2.0.0.0</version>
             <scope>test</scope>
         </dependency>
+        <!-- https://mvnrepository.com/artifact/tw.teddysoft.ezddd/ezddd-core -->
+        <dependency>
+            <groupId>tw.teddysoft.ezddd</groupId>
+            <artifactId>ezddd-core</artifactId>
+            <version>1.0.11</version>
+        </dependency>
     </dependencies>
 
     <build>

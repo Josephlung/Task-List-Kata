@@ -1,6 +1,8 @@
 package com.codurance.training.tasks.Entity;
 
-public final class Task {
+import tw.teddysoft.ezddd.core.entity.Entity;
+
+public class Task implements Entity<TaskId> {
     private final TaskId id;
     private final String description;
     private boolean done;

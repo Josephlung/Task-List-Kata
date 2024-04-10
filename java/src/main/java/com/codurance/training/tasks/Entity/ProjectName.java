@@ -1,6 +1,8 @@
 package com.codurance.training.tasks.Entity;
 
-public record ProjectName(String value) {
+import tw.teddysoft.ezddd.core.entity.ValueObject;
+
+public record ProjectName(String value) implements ValueObject {
     public static ProjectName of(String name) {
         return new ProjectName(name);
     }
