@@ -37,3 +37,12 @@
 2. Enforce aggregate invariants by implementing ReadOnly subtypes for Project and Task.
 
 3. Create class `ReadOnlyTask` and `ReadOnlyProject`.
+
+**HW6**
+1. Remove class `Tasks` and interface `Command`, use switch case to invoke commands.
+
+2. Divide class `AddCommand` to `AddProjectUseCase` and `AddTaskUseCase`
+
+3. Merge `CheckCommand` and `UncheckCommand` to class `SetDoneUseCase`
+
+4. Implement Use Case Input: `AddProjectInput`, `AddTaskInput`, `SetDoneInput` and `ErrorInput`
