@@ -13,7 +13,7 @@ public class ShowCommand {
         this.projects = projects;
     }
 
-    public List<String> execute(String command) {
+    public List<String> execute() {
         List<String> outputResult = new ArrayList<>();
         for (Project project : projects.getProjects()) {
             outputResult.add(project.getProjectName().toString() + "\r\n");

@@ -6,9 +6,7 @@ import com.codurance.training.tasks.UseCase.Commands.*;
 import com.codurance.training.tasks.UseCase.InputBoundary.InputBoundary;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 public class UseCaseInteractor implements InputBoundary {
     private final Projects projects;
@@ -22,7 +20,7 @@ public class UseCaseInteractor implements InputBoundary {
         List<String> outputData = new ArrayList<>();
         switch (commandRest[0]) {
             case "show":
-                outputData = new ShowCommand(projects).execute(null);
+                outputData = new ShowCommand(projects).execute();
                 break;
             case "add":
                 subcommandRest = commandRest[1].split(" ", 2);
@@ -52,7 +50,7 @@ public class UseCaseInteractor implements InputBoundary {
                 outputData = new SetDoneUseCase(projects).execute(uncheckInput);
                 break;
             case "help":
-                outputData = new HelpCommand().execute(null);
+                outputData = new HelpCommand().execute();
                 break;
             default:
                 ErrorInput input = new ErrorInput();

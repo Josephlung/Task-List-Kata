@@ -6,7 +6,7 @@ import java.util.List;
 public class HelpCommand{
     public HelpCommand() {
     }
-    public List<String> execute(String command) {
+    public List<String> execute() {
         List<String> outputResult = new ArrayList<>();
         outputResult.add("Commands:\r\n");
         outputResult.add("  show\r\n");
