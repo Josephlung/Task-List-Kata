@@ -2,7 +2,6 @@ package com.codurance.training.tasks.UseCase.Commands;
 
 import com.codurance.training.tasks.Entity.ProjectName;
 import com.codurance.training.tasks.Entity.Projects;
-import com.codurance.training.tasks.Entity.Tasks;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,7 +27,7 @@ public class AddCommand implements Command {
     }
 
     private void addProject(ProjectName name) {
-        projects.addProject(name, new Tasks());
+        projects.addProject(name, new ArrayList<>());
     }
 
     private List<String> addTask(ProjectName projectName, String description) {

@@ -18,7 +18,7 @@ public class ShowCommand implements Command{
         List<String> outputResult = new ArrayList<>();
         for (Project project : projects.getProjects()) {
             outputResult.add(project.getProjectName().toString() + "\r\n");
-            for (Task task : project.getTasks().getTasList()) {
+            for (Task task : project.getTasks()) {
                 outputResult.add("    [" + (task.isDone() ? 'x' : ' ') + "] " + task.getId() + ": " + task.getDescription() + "\r\n");
             }
             outputResult.add("\r\n");

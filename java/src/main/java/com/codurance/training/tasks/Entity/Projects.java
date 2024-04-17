@@ -29,7 +29,7 @@ public class Projects extends AggregateRoot<ProjectsId, DomainEvent>{
         }
     }
 
-    public void addProject(ProjectName projectName, Tasks tasks){
+    public void addProject(ProjectName projectName, List<Task> tasks){
         this.projects.add(new Project(projectName, tasks));
     }
 
