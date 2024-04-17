@@ -3,11 +3,10 @@ package com.codurance.training.tasks.UseCase.Commands;
 import java.util.ArrayList;
 import java.util.List;
 
-public class HelpCommand implements Command{
+public class HelpCommand{
     public HelpCommand() {
     }
-    @Override
-    public List<String> executeCommand(String command) {
+    public List<String> execute(String command) {
         List<String> outputResult = new ArrayList<>();
         outputResult.add("Commands:\r\n");
         outputResult.add("  show\r\n");
