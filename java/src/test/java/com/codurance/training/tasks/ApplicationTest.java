@@ -8,6 +8,8 @@ import java.io.PipedOutputStream;
 import java.io.PrintWriter;
 
 import com.codurance.training.tasks.Persistence.TaskListRunner;
+import com.codurance.training.tasks.UseCase.Port.Out.ProjectsRepository;
+import com.codurance.training.tasks.UseCase.ProjectInMemoryRepository;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -29,7 +31,11 @@ public final class ApplicationTest {
     public ApplicationTest() throws IOException {
         BufferedReader in = new BufferedReader(new InputStreamReader(new PipedInputStream(inStream)));
         PrintWriter out = new PrintWriter(new PipedOutputStream(outStream), true);
-        TaskListRunner taskListRunner = new TaskListRunner(in, out);
+
+        ProjectsRepository repository = new ProjectInMemoryRepository();
+        repository.save(TaskListRunner.projects);
+
+        TaskListRunner taskListRunner = new TaskListRunner(in, out, repository);
         applicationThread = new Thread(taskListRunner);
     }
 

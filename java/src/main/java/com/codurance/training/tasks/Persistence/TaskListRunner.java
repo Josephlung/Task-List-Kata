@@ -1,11 +1,10 @@
 package com.codurance.training.tasks.Persistence;
 
+import com.codurance.training.tasks.Entity.Projects;
+import com.codurance.training.tasks.Entity.ProjectsId;
 import com.codurance.training.tasks.InterfaceAdapter.Controller;
-import com.codurance.training.tasks.InterfaceAdapter.Presenter;
-import com.codurance.training.tasks.Persistence.Console.ConsoleInput;
-import com.codurance.training.tasks.Persistence.Console.ConsoleOutput;
-import com.codurance.training.tasks.UseCase.InputBoundary.InputBoundary;
-import com.codurance.training.tasks.UseCase.UseCaseInteractor;
+import com.codurance.training.tasks.UseCase.Port.Out.ProjectsRepository;
+import com.codurance.training.tasks.UseCase.ProjectInMemoryRepository;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -14,41 +13,41 @@ import java.io.PrintWriter;
 
 public final class TaskListRunner implements Runnable {
     private static final String QUIT = "quit";
-    private final ConsoleInput consoleInput;
-    private final ConsoleOutput consoleOutput;
-    private final Controller controller;
+    public static final ProjectsId DEFAULT_PROJECTS_ID = ProjectsId.of("001");
+
+    public final static Projects projects = new Projects(DEFAULT_PROJECTS_ID);
+    private final ProjectsRepository repository;
+    private final BufferedReader in;
+    private final PrintWriter out;
 
     public static void main(String[] args) throws Exception {
         BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
         PrintWriter out = new PrintWriter(System.out);
-        new TaskListRunner(in, out).run();
+        ProjectsRepository repository = new ProjectInMemoryRepository();
+        repository.save(projects);
+        new TaskListRunner(in, out, repository).run();
     }
 
-    public TaskListRunner(BufferedReader reader, PrintWriter writer) {
-        consoleInput = new ConsoleInput(reader);
-        consoleOutput = new ConsoleOutput(writer);
-        InputBoundary useCaseInteractor = new UseCaseInteractor();
-        controller = new Controller(useCaseInteractor);
+    public TaskListRunner(BufferedReader reader, PrintWriter writer, ProjectsRepository repository) {
+        this.repository = repository;
+        this.in = reader;
+        this.out = writer;
     }
 
     public void run() {
         while (true) {
-            consoleOutput.output();
+            out.print("> ");
+            out.flush();
             String command;
             try {
-                command = consoleInput.readLine();
+                command = in.readLine();
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
             if (command.equals(QUIT)) {
                 break;
             }
-            execute(command);
+            new Controller(projects, out, repository).execute(command);
         }
-    }
-
-    private void execute(String commandLine) {
-        Presenter presenter = new Presenter(controller.execute(commandLine));
-        consoleOutput.setOutputQueue(presenter.getResult());
     }
 }

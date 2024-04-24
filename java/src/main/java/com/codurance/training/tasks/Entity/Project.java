@@ -19,9 +19,10 @@ public class Project implements Entity<ProjectName>{
     }
 
     public List<Task> getTasks() {
-        return tasks.stream()
-                .map(t -> (Task) new ReadOnlyTask(t.getId(), t.getDescription(), t.isDone()))
-                .toList();
+//        return tasks.stream()
+//                .map(t -> (Task) new ReadOnlyTask(t.getId(), t.getDescription(), t.isDone()))
+//                .toList();
+        return tasks;
     }
 
     public void addTask(Task task) {

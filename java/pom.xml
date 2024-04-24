@@ -26,6 +26,12 @@
             <artifactId>ezddd-core</artifactId>
             <version>1.0.11</version>
         </dependency>
+        <!-- https://mvnrepository.com/artifact/tw.teddysoft.ezddd/ezcqrs -->
+        <dependency>
+            <groupId>tw.teddysoft.ezddd</groupId>
+            <artifactId>ezcqrs</artifactId>
+            <version>1.0.11</version>
+        </dependency>
     </dependencies>
 
     <build>
