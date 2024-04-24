@@ -1,4 +1,4 @@
-package com.codurance.training.tasks.UseCase;
+package com.codurance.training.tasks.UseCase.Port.In.Task.Add;
 
 public class SetDoneInput {
     public String id;

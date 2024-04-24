@@ -32,7 +32,6 @@ public class Controller {
     public void execute(String commandLine) {
         String[] commandRest = commandLine.split(" ", 2);
         String[] subcommandRest;
-        List<String> outputData = new ArrayList<>();
         switch (commandRest[0]) {
             case "show":
                 ShowUseCase showUseCase = new ShowService(repository);

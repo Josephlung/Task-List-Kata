@@ -20,7 +20,6 @@ public class AddTaskService {
     }
 
     private void addTask(ProjectName projectName, String description, PrintWriter out) {
-        List<String> outputResult = new ArrayList<>();
         if(projects.hasProjectName(projectName)) {
             projects.addTask(projectName, description, false);
             return;

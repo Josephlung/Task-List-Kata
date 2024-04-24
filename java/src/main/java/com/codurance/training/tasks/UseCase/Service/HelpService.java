@@ -1,8 +1,6 @@
 package com.codurance.training.tasks.UseCase.Service;
 
 import java.io.PrintWriter;
-import java.util.ArrayList;
-import java.util.List;
 
 public class HelpService {
     private final PrintWriter out;
