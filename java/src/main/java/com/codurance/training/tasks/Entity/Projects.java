@@ -7,7 +7,7 @@ import tw.teddysoft.ezddd.core.entity.DomainEvent;
 
 public class Projects extends AggregateRoot<ProjectsId, DomainEvent>{
     private final List<Project> projects;
-    private static TaskId lastId = new TaskId(0);
+    private long lastId = 0;
     private final ProjectsId id;
 
     public Projects(ProjectsId id) {
@@ -24,7 +24,7 @@ public class Projects extends AggregateRoot<ProjectsId, DomainEvent>{
     public void addTask(ProjectName projectName, String description, boolean done){
         for(Project project : projects) {
             if(Objects.equals(project.getProjectName(), projectName)) {
-                project.addTask(new Task(nextId(), description, done));
+                project.addTask(new Task(TaskId.of(nextId()), description, done));
             }
         }
     }
@@ -33,9 +33,8 @@ public class Projects extends AggregateRoot<ProjectsId, DomainEvent>{
         this.projects.add(new Project(projectName, tasks));
     }
 
-    public TaskId nextId() {
-        lastId = TaskId.of(lastId.value() + 1);
-        return lastId;
+    public long nextId() {
+        return ++lastId;
     }
 
     public boolean hasProjectName(ProjectName projectName){
@@ -47,10 +46,10 @@ public class Projects extends AggregateRoot<ProjectsId, DomainEvent>{
         return false;
     }
 
-    public List<String> setDone(String idString, boolean done) {
+    public List<String> setDone(TaskId taskId, boolean done) {
         List<String> outputResult = new ArrayList<>();
         for (Project project : projects) {
-            outputResult = project.setDone(idString, done);
+            outputResult = project.setDone(taskId, done);
             if(outputResult == null) {
                 return new ArrayList<>();
             }
@@ -61,5 +60,9 @@ public class Projects extends AggregateRoot<ProjectsId, DomainEvent>{
     @Override
     public ProjectsId getId() {
         return id;
+    }
+
+    public boolean containTask(TaskId taskId) {
+        return projects.stream().anyMatch(p-> p.containTask(taskId));
     }
 }

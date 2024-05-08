@@ -1,6 +1,9 @@
 package com.codurance.training.tasks.UseCase.Port.In.Task.SetDone;
 
-public class SetDoneInput {
-    public String id;
+import tw.teddysoft.ezddd.core.usecase.Input;
+
+public class SetDoneInput implements Input {
+    public String projectsId;
+    public String taskId;
     public boolean done;
 }

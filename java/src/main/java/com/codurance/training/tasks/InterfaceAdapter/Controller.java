@@ -57,15 +57,17 @@ public class Controller {
                 break;
             case "check":
                 SetDoneInput checkInput = new SetDoneInput();
-                checkInput.id = commandRest[1];
+                checkInput.projectsId = TaskListRunner.DEFAULT_PROJECTS_ID.value();
+                checkInput.taskId = commandRest[1];
                 checkInput.done = true;
-                new SetDoneService(projects, out).setDone(checkInput);
+                new SetDoneService(repository, out).execute(checkInput);
                 break;
             case "uncheck":
                 SetDoneInput uncheckInput = new SetDoneInput();
-                uncheckInput.id = commandRest[1];
+                uncheckInput.projectsId = TaskListRunner.DEFAULT_PROJECTS_ID.value();
+                uncheckInput.taskId = commandRest[1];
                 uncheckInput.done = false;
-                new SetDoneService(projects, out).setDone(uncheckInput);
+                new SetDoneService(repository, out).execute(uncheckInput);
                 break;
             case "help":
                 new HelpService(out).execute();

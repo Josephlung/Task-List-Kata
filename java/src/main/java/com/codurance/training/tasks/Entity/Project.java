@@ -34,17 +34,20 @@ public class Project implements Entity<ProjectName>{
         return projectName;
     }
 
-    public List<String> setDone(String idString, boolean done) {
+    public List<String> setDone(TaskId taskId, boolean done) {
         List<String> results = new ArrayList<>();
-        int id = Integer.parseInt(idString);
         for (Task task : tasks) {
-            if (task.getId().equals(TaskId.of(id))) {
+            if (task.getId().equals(taskId)) {
                 task.setDone(done);
                 return null;
             }
         }
-        results.add("Could not find a task with an ID of " + idString + ".");
+        results.add("Could not find a task with an ID of " + taskId.toString() + ".");
         results.add("\r\n");
         return results;
+    }
+
+    public boolean containTask(TaskId taskId) {
+        return tasks.stream().anyMatch(task -> task.getId().equals(taskId));
     }
 }
