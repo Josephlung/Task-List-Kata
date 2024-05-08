@@ -2,25 +2,28 @@ package com.codurance.training.tasks.UseCase.Service;
 
 import com.codurance.training.tasks.Entity.ProjectName;
 import com.codurance.training.tasks.Entity.Projects;
+import com.codurance.training.tasks.Entity.ProjectsId;
 import com.codurance.training.tasks.UseCase.Port.In.Task.Add.AddTaskInput;
 import com.codurance.training.tasks.UseCase.Port.In.Task.Add.AddTaskUseCase;
+import com.codurance.training.tasks.UseCase.Port.Out.ProjectsRepository;
 import tw.teddysoft.ezddd.cqrs.usecase.CqrsOutput;
 
 import java.io.PrintWriter;
 
 public class AddTaskService implements AddTaskUseCase {
-    private final Projects projects;
+    private final ProjectsRepository repository;
     private final PrintWriter out;
-    public AddTaskService(Projects projects, PrintWriter out){
-        this.projects = projects;
+    public AddTaskService(ProjectsRepository repository, PrintWriter out){
+        this.repository = repository;
         this.out = out;
     }
 
     public CqrsOutput execute(AddTaskInput input) {
-        return addTask(ProjectName.of(input.projectName), input.description);
+        return addTask(ProjectsId.of(input.projectsId), ProjectName.of(input.projectName), input.description);
     }
 
-    private CqrsOutput addTask(ProjectName projectName, String description) {
+    private CqrsOutput addTask(ProjectsId projectsId, ProjectName projectName, String description) {
+        Projects projects = (Projects)repository.findById(projectsId).get();
         if(projects.hasProjectName(projectName)) {
             projects.addTask(projectName, description, false);
             return CqrsOutput.create().succeed().setId(projectName.toString());

@@ -53,9 +53,10 @@ public class Controller {
                 else if (subcommandRest[0].equals("task")) {
                     String[] subcommand = subcommandRest[1].split(" ", 2);
                     AddTaskInput input = new AddTaskInput();
+                    input.projectsId = TaskListRunner.DEFAULT_PROJECTS_ID.value();
                     input.projectName = subcommand[0];
                     input.description = subcommand[1];
-                    new AddTaskService(projects, out).execute(input);
+                    new AddTaskService(repository, out).execute(input);
                 }
                 break;
             case "check":
