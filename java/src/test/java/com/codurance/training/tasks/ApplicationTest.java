@@ -7,9 +7,13 @@ import java.io.PipedInputStream;
 import java.io.PipedOutputStream;
 import java.io.PrintWriter;
 
+import com.codurance.training.tasks.Entity.Projects;
+import com.codurance.training.tasks.InterfaceAdapter.presenter.HelpConsolePresenter;
+import com.codurance.training.tasks.InterfaceAdapter.presenter.ShowConsolePresenter;
 import com.codurance.training.tasks.Persistence.TaskListRunner;
 import com.codurance.training.tasks.UseCase.Port.Out.ProjectsRepository;
 import com.codurance.training.tasks.InterfaceAdapter.Out.Repository.ProjectInMemoryRepository;
+import com.codurance.training.tasks.UseCase.Service.*;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -29,13 +33,28 @@ public final class ApplicationTest {
     private Thread applicationThread;
 
     public ApplicationTest() throws IOException {
-        BufferedReader in = new BufferedReader(new InputStreamReader(new PipedInputStream(inStream)));
-        PrintWriter out = new PrintWriter(new PipedOutputStream(outStream), true);
-
+        BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
+        PrintWriter out = new PrintWriter(System.out);
         ProjectsRepository repository = new ProjectInMemoryRepository();
-        repository.save(TaskListRunner.projects);
+        repository.save(new Projects(TaskListRunner.DEFAULT_PROJECTS_ID));
+        var showUseCase = new ShowService(repository);
+        var showPresenter = new ShowConsolePresenter(out);
+        var addProjectUseCase = new AddProjectService(repository);
+        var addTaskUseCase = new AddTaskService(repository, out);
+        var setDoneUseCase = new SetDoneService(repository, out);
+        var helpUseCase = new HelpService(new HelpConsolePresenter(out));
+        var errorUseCase = new ErrorService(out);
 
-        TaskListRunner taskListRunner = new TaskListRunner(in, out, repository);
+        TaskListRunner taskListRunner = new TaskListRunner(
+                in,
+                out,
+                showUseCase,
+                showPresenter,
+                addProjectUseCase,
+                addTaskUseCase,
+                setDoneUseCase,
+                helpUseCase,
+                errorUseCase);
         applicationThread = new Thread(taskListRunner);
     }
 
