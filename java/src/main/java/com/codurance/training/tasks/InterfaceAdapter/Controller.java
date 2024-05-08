@@ -1,10 +1,12 @@
 package com.codurance.training.tasks.InterfaceAdapter;
 
 import com.codurance.training.tasks.Entity.Projects;
+import com.codurance.training.tasks.InterfaceAdapter.presenter.HelpConsolePresenter;
 import com.codurance.training.tasks.InterfaceAdapter.presenter.ShowConsolePresenter;
 import com.codurance.training.tasks.Persistence.TaskListRunner;
 import com.codurance.training.tasks.UseCase.Port.In.Projects.Error.ErrorInput;
 import com.codurance.training.tasks.UseCase.Port.In.Project.Add.AddProjectInput;
+import com.codurance.training.tasks.UseCase.Port.In.Projects.Help.HelpUseCase;
 import com.codurance.training.tasks.UseCase.Port.In.Projects.Show.ShowInput;
 import com.codurance.training.tasks.UseCase.Port.In.Projects.Show.ShowOutput;
 import com.codurance.training.tasks.UseCase.Port.In.Projects.Show.ShowUseCase;
@@ -13,6 +15,7 @@ import com.codurance.training.tasks.UseCase.Port.In.Task.Add.AddTaskInput;
 import com.codurance.training.tasks.UseCase.Port.Out.Projects.Show.ShowPresenter;
 import com.codurance.training.tasks.UseCase.Port.Out.ProjectsRepository;
 import com.codurance.training.tasks.UseCase.Service.*;
+import tw.teddysoft.ezddd.core.usecase.Input;
 
 import java.io.PrintWriter;
 
@@ -70,7 +73,8 @@ public class Controller {
                 new SetDoneService(repository, out).execute(uncheckInput);
                 break;
             case "help":
-                new HelpService(out).execute();
+                HelpUseCase helpUseCase = new HelpService(new HelpConsolePresenter(out));
+                helpUseCase.execute(new Input.NullInput());
                 break;
             default:
                 ErrorInput input = new ErrorInput();

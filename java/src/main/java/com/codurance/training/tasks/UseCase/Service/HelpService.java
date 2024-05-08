@@ -1,19 +1,29 @@
 package com.codurance.training.tasks.UseCase.Service;
 
-import java.io.PrintWriter;
+import com.codurance.training.tasks.UseCase.Port.In.Projects.Help.HelpDto;
+import com.codurance.training.tasks.UseCase.Port.In.Projects.Help.HelpUseCase;
+import com.codurance.training.tasks.UseCase.Port.In.Projects.Help.HelpOutput;
+import com.codurance.training.tasks.UseCase.Port.Out.Projects.Help.HelpPresenter;
+import tw.teddysoft.ezddd.core.usecase.ExitCode;
+import tw.teddysoft.ezddd.core.usecase.Input;
 
-public class HelpService {
-    private final PrintWriter out;
-    public HelpService(PrintWriter out) {
-        this.out = out;
+public class HelpService implements HelpUseCase {
+    private final HelpPresenter presenter;
+    public HelpService(HelpPresenter presenter) {
+        this.presenter = presenter;
     }
-    public void execute() {
-        out.print("Commands:\r\n");
-        out.print("  show\r\n");
-        out.print("  add project <project name>\r\n");
-        out.print("  add task <project name> <task description>\r\n");
-        out.print("  check <task ID>\r\n");
-        out.print("  uncheck <task ID>\r\n");
-        out.print("\r\n");
+    public HelpOutput execute(Input.NullInput input) {
+        HelpDto helpDto = new HelpDto();
+        helpDto.heading = "Commands:";
+        helpDto.commands.add("show");
+        helpDto.commands.add("add project <project name>");
+        helpDto.commands.add("add task <project name> <task description>");
+        helpDto.commands.add("check <task ID>");
+        helpDto.commands.add("uncheck <task ID>");
+        presenter.present(helpDto);
+
+        var output = HelpOutput.create();
+        output.helpDto = helpDto;
+        return output.setExitCode(ExitCode.SUCCESS).setMessage("");
     }
 }
