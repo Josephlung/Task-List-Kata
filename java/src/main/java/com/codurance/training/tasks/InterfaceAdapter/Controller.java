@@ -3,7 +3,7 @@ package com.codurance.training.tasks.InterfaceAdapter;
 import com.codurance.training.tasks.Entity.Projects;
 import com.codurance.training.tasks.InterfaceAdapter.presenter.ShowConsolePresenter;
 import com.codurance.training.tasks.Persistence.TaskListRunner;
-import com.codurance.training.tasks.UseCase.Port.In.Error.ErrorInput;
+import com.codurance.training.tasks.UseCase.Port.In.Projects.Error.ErrorInput;
 import com.codurance.training.tasks.UseCase.Port.In.Project.Add.AddProjectInput;
 import com.codurance.training.tasks.UseCase.Port.In.Projects.Show.ShowInput;
 import com.codurance.training.tasks.UseCase.Port.In.Projects.Show.ShowOutput;
