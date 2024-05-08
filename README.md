@@ -41,8 +41,18 @@
 **HW6**
 1. Remove class `Tasks` and interface `Command`, use switch case to invoke commands.
 
-2. Divide class `AddCommand` to `AddProjectUseCase` and `AddTaskUseCase`
+2. Divide class `AddCommand` to `AddProjectService` and `AddTaskService`
 
-3. Merge `CheckCommand` and `UncheckCommand` to class `SetDoneUseCase`
+3. Merge `CheckCommand` and `UncheckCommand` to class `SetDoneUseService`
 
 4. Implement Use Case Input: `AddProjectInput`, `AddTaskInput`, `SetDoneInput` and `ErrorInput`
+
+5. Remove `UseCaseInteractor`, use `Command` invoke services.
+
+6. Implement `ProjectsRepository`.
+
+7. Refactor `ShowCommand`, create `ShowInput`, `ShowOutput`, `ShowConsolePresenter`, interface `ShowUseCase`.
+
+8. Create DTO Object : `ProjectsDto`, `ProjectDto`, `TaskDto`.
+
+9. Create Mapper to convert DTO : `ProjectsMapper` `ProjectMapper`, `TaskMapper`.
