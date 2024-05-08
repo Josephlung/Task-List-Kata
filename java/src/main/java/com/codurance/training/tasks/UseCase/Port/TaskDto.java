@@ -1,4 +1,4 @@
-package com.codurance.training.tasks.UseCase.Port.In.Projects.Show;
+package com.codurance.training.tasks.UseCase.Port;
 
 public class TaskDto {
     public String id;

@@ -2,9 +2,9 @@ package com.codurance.training.tasks.Persistence;
 
 import com.codurance.training.tasks.Entity.Projects;
 import com.codurance.training.tasks.Entity.ProjectsId;
-import com.codurance.training.tasks.InterfaceAdapter.Controller;
+import com.codurance.training.tasks.InterfaceAdapter.controller.Controller;
 import com.codurance.training.tasks.UseCase.Port.Out.ProjectsRepository;
-import com.codurance.training.tasks.UseCase.ProjectInMemoryRepository;
+import com.codurance.training.tasks.InterfaceAdapter.Out.Repository.ProjectInMemoryRepository;
 
 import java.io.BufferedReader;
 import java.io.IOException;

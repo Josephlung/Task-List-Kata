@@ -9,7 +9,7 @@ import java.io.PrintWriter;
 
 import com.codurance.training.tasks.Persistence.TaskListRunner;
 import com.codurance.training.tasks.UseCase.Port.Out.ProjectsRepository;
-import com.codurance.training.tasks.UseCase.ProjectInMemoryRepository;
+import com.codurance.training.tasks.InterfaceAdapter.Out.Repository.ProjectInMemoryRepository;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;

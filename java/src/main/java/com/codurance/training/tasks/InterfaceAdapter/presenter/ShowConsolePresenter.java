@@ -1,8 +1,8 @@
 package com.codurance.training.tasks.InterfaceAdapter.presenter;
 
-import com.codurance.training.tasks.UseCase.Port.In.Projects.Show.ProjectDto;
-import com.codurance.training.tasks.UseCase.Port.In.Projects.Show.ProjectsDto;
-import com.codurance.training.tasks.UseCase.Port.In.Projects.Show.TaskDto;
+import com.codurance.training.tasks.UseCase.Port.ProjectDto;
+import com.codurance.training.tasks.UseCase.Port.ProjectsDto;
+import com.codurance.training.tasks.UseCase.Port.TaskDto;
 import com.codurance.training.tasks.UseCase.Port.Out.Projects.Show.ShowPresenter;
 import java.io.PrintWriter;
 

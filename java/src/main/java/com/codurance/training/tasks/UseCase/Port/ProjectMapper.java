@@ -1,7 +1,6 @@
 package com.codurance.training.tasks.UseCase.Port;
 
 import com.codurance.training.tasks.Entity.Project;
-import com.codurance.training.tasks.UseCase.Port.In.Projects.Show.ProjectDto;
 
 import java.util.List;
 

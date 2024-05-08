@@ -1,4 +1,4 @@
-package com.codurance.training.tasks.UseCase;
+package com.codurance.training.tasks.InterfaceAdapter.Out.Repository;
 
 import com.codurance.training.tasks.Entity.Projects;
 import com.codurance.training.tasks.Entity.ProjectsId;

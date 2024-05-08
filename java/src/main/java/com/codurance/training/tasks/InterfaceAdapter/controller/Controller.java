@@ -1,4 +1,4 @@
-package com.codurance.training.tasks.InterfaceAdapter;
+package com.codurance.training.tasks.InterfaceAdapter.controller;
 
 import com.codurance.training.tasks.Entity.Projects;
 import com.codurance.training.tasks.InterfaceAdapter.presenter.HelpConsolePresenter;
