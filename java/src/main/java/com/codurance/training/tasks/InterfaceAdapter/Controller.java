@@ -8,15 +8,13 @@ import com.codurance.training.tasks.UseCase.Port.In.Project.Add.AddProjectInput;
 import com.codurance.training.tasks.UseCase.Port.In.Projects.Show.ShowInput;
 import com.codurance.training.tasks.UseCase.Port.In.Projects.Show.ShowOutput;
 import com.codurance.training.tasks.UseCase.Port.In.Projects.Show.ShowUseCase;
-import com.codurance.training.tasks.UseCase.Port.In.Task.Add.SetDoneInput;
-import com.codurance.training.tasks.UseCase.Port.In.Task.SetDone.AddTaskInput;
+import com.codurance.training.tasks.UseCase.Port.In.Task.SetDone.SetDoneInput;
+import com.codurance.training.tasks.UseCase.Port.In.Task.Add.AddTaskInput;
 import com.codurance.training.tasks.UseCase.Port.Out.Projects.Show.ShowPresenter;
 import com.codurance.training.tasks.UseCase.Port.Out.ProjectsRepository;
 import com.codurance.training.tasks.UseCase.Service.*;
 
 import java.io.PrintWriter;
-import java.util.ArrayList;
-import java.util.List;
 
 public class Controller {
     private final Projects projects;
@@ -45,15 +43,16 @@ public class Controller {
                 subcommandRest = commandRest[1].split(" ", 2);
                 if (subcommandRest[0].equals("project")) {
                     AddProjectInput input = new AddProjectInput();
+                    input.projectId = TaskListRunner.DEFAULT_PROJECTS_ID.value();
                     input.projectName = subcommandRest[1];
-                    new AddProjectService(projects).execute(input);
+                    new AddProjectService(repository).execute(input);
                 }
                 else if (subcommandRest[0].equals("task")) {
-                    String[] projectTask = subcommandRest[1].split(" ", 2);
+                    String[] subcommand = subcommandRest[1].split(" ", 2);
                     AddTaskInput input = new AddTaskInput();
-                    input.projectName = projectTask[0];
-                    input.description = projectTask[1];
-                    new AddTaskService(projects).execute(input, out);
+                    input.projectName = subcommand[0];
+                    input.description = subcommand[1];
+                    new AddTaskService(projects, out).execute(input);
                 }
                 break;
             case "check":

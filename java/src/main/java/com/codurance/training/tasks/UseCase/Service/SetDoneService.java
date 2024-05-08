@@ -3,7 +3,7 @@ package com.codurance.training.tasks.UseCase.Service;
 import com.codurance.training.tasks.Entity.Projects;
 import com.codurance.training.tasks.Entity.Task;
 import com.codurance.training.tasks.Entity.TaskId;
-import com.codurance.training.tasks.UseCase.Port.In.Task.Add.SetDoneInput;
+import com.codurance.training.tasks.UseCase.Port.In.Task.SetDone.SetDoneInput;
 
 import java.io.PrintWriter;
 
