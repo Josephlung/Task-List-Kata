@@ -56,8 +56,10 @@
 8. Create DTO Object : `ProjectsDto`, `ProjectDto`, `TaskDto`.
 
 9. Create Mapper to convert DTO : `ProjectsMapper` `ProjectMapper`, `TaskMapper`.
+
 (5/8)
 1. Add and implement Interface `ErrorUseCase`, `HelpUseCase` and `HelpPresenter`, and use HelpDto pass data.
 
 2. Main Component DI UseCases to Controller.
-#Test Case can not work, nedd to fix.
+
+#Test Case can not work, need to fix.
