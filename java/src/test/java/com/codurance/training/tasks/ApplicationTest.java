@@ -33,8 +33,8 @@ public final class ApplicationTest {
     private Thread applicationThread;
 
     public ApplicationTest() throws IOException {
-        BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
-        PrintWriter out = new PrintWriter(System.out);
+        BufferedReader in = new BufferedReader(new InputStreamReader(new PipedInputStream(inStream)));
+        PrintWriter out = new PrintWriter(new PipedOutputStream(outStream), true);
         ProjectsRepository repository = new ProjectInMemoryRepository();
         repository.save(new Projects(TaskListRunner.DEFAULT_PROJECTS_ID));
         var showUseCase = new ShowService(repository);
