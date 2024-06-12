@@ -63,3 +63,5 @@
 2. Main Component DI UseCases to Controller.
 
 #Test Case can not work, need to fix.
+(6/13)
+Fix test case.
